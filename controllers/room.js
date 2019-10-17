@@ -1,11 +1,11 @@
 const Room = require('../models/room')
-const { io } = require('../config/socket')
 
-class GameController {
+class RoomController {
     static create(req, res, next) {
-        const { name, group, status, roomMaster } = req.body
-        Room.create({ name, group, status, roomMaster })
+        const { name, groupA, groupB, status, roomMaster } = req.body
+        Room.create({ name, groupA, groupB, status, roomMaster })
             .then(room => {
+                req.io.emit('createRoom', room)
                 res.status(201).json(room)
             })
             .catch(next)
@@ -14,6 +14,7 @@ class GameController {
     static find(req, res, next) {
         Room.find()
             .then(rooms => {
+                req.io.emit('getAllRoom', rooms)
                 res.status(200).json(rooms)
             })
             .catch(next)
@@ -43,7 +44,6 @@ class GameController {
             })
             .catch(next)
     }
-
 }
 
-module.exports = GameController
+module.exports = RoomController

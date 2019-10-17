@@ -8,15 +8,16 @@ const roomSchema = new Schema({
         maxlength: [12, `max length 12 char`]
     },
     groupA: {
-        type: Map,
-        of: String
+        type: Map
     },
     groupB: {
-        type: Map,
-        of: String
+        type: Map
     },
+
     status: String,
-    roomMaster: String
+    roomMaster: {
+        type: Map,
+    }
 }, {
     versionKey: false,
     timestamps: true
