@@ -14,6 +14,11 @@ const errorHandler = require('./middlewares/errorHandler')
 const router = require('./routes/index')
 const PORT = process.env.PORT || 3000
 
+io.on('connection', function (socket) {
+    socket.on('addplayer', function (player) {
+        io.emit('notificationNewPlayer', `${player.name} join the game room`)
+    })
+})
 
 app.use(function (req, res, next) {
     req.io = io
