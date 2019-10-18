@@ -5,7 +5,11 @@ const roomSchema = new Schema({
     name: {
         type: String,
         required: [true, `Name room must be filled`],
-        maxlength: [12, `max length 12 char`]
+        maxlength: [50, `max length 50 char`]
+    },
+    description: {
+        type: String,
+        maxlength: [50, `character maximum 50`]
     },
     groupA: {
         type: Map
@@ -13,7 +17,6 @@ const roomSchema = new Schema({
     groupB: {
         type: Map
     },
-
     status: String,
     roomMaster: {
         type: Map,
